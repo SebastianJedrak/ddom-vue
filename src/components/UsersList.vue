@@ -2,6 +2,13 @@
   <div class="users-container">
     <h1>Users List</h1>
 
+    <!-- Test error button -->
+    <div class="test-error-container">
+      <button @click="testError" class="test-error-button">
+        Test Error Handling (404)
+      </button>
+    </div>
+
     <!-- Loading state -->
     <div v-if="loading" class="loading-container">
       <div class="loading-spinner"></div>
@@ -28,13 +35,6 @@
           <p><strong>Company:</strong> {{ user.company.name }}</p>
         </div>
       </div>
-    </div>
-
-    <!-- Test error button -->
-    <div class="test-error-container">
-      <button @click="testError" class="test-error-button">
-        Test Error Handling (404)
-      </button>
     </div>
   </div>
 
@@ -187,10 +187,10 @@ h1 {
 }
 
 .test-error-container {
-  margin-top: 40px;
+  margin: 40px 0;
   text-align: center;
   padding: 20px;
-  border-top: 1px solid #eee;
+  border: 1px solid #eee;
 }
 
 .test-error-button {
