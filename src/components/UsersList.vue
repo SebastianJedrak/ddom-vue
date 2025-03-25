@@ -8,6 +8,12 @@
       <p>Loading users...</p>
     </div>
 
+    <!-- Empty state -->
+    <div v-else-if="!users.length" class="empty-state">
+      <p>No users found</p>
+      <button @click="loadUsers" class="reload-button">Try Again</button>
+    </div>
+
     <!-- Users list -->
     <div v-else class="users-grid">
       <div v-for="user in users" :key="user.id" class="user-card">
