@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <ErrorBanner :error="error" />
+  <ErrorBanner :error="error" :dismissError="dismissError" />
 </template>
 
 <script lang="ts">
@@ -67,6 +67,9 @@ export default {
       } catch (err) {
         this.error = err;
       }
+    },
+    dismissError() {
+      this.error = null;
     },
   },
   mounted() {

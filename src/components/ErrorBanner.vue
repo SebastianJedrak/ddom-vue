@@ -38,7 +38,7 @@ export default {
       errorType: "generic",
     };
   },
-  props: { error: ApiError | null },
+  props: { error: ApiError | null, dismissError: Function },
   computed: {
     errorType() {
       if (!this.error) return "generic";
