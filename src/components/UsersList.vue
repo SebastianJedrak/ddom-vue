@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <ErrorBanner :errorMessage="error" />
+  <ErrorBanner :error="error" />
 </template>
 
 <script lang="ts">

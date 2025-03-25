@@ -47,7 +47,7 @@ async function fetchData<T>(endpoint: string): Promise<T> {
     // Check if response is OK
     if (!response.ok) {
       throw new ApiError(
-        `API request failed with status: ${response.status}`,
+        `API request failed`,
         response.status
       );
     }
@@ -55,7 +55,6 @@ async function fetchData<T>(endpoint: string): Promise<T> {
     return (await response.json()) as T;
   } catch (error) {
     if (error instanceof ApiError) {
-      console.log(error.status);
       throw error;
     }
 

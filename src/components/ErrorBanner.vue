@@ -1,6 +1,5 @@
 <template>
-  <span>{{ errorMessage }}</span>
-  <!-- <Transition name="fade">
+  <Transition name="fade">
     <div v-if="error" :class="['error-banner', `error-${errorType}`]">
       <div class="error-content">
         <div class="error-icon">
@@ -21,22 +20,34 @@
           </svg>
         </div>
         <div class="error-message">
-          <span v-if="error.code" class="error-code"
-            >Error {{ error.code }}:</span
-          >
-          {{ error.message }}
+          <span class="error-code">Error {{ error.status }}:</span>
+          <span>{{ error.message }}</span>
         </div>
       </div>
       <button class="error-close" @click="dismissError">×</button>
     </div>
-  </Transition> -->
+  </Transition>
 </template>
 
 <script lang="ts">
 import { ApiError } from "../services/api";
 
 export default {
-  props: { errorMessage: ApiError | null },
+  data() {
+    return {
+      errorType: "generic",
+    };
+  },
+  props: { error: ApiError | null },
+  computed: {
+    errorType() {
+      if (!this.error) return "generic";
+      if (this.error.status >= 500) return "server";
+      if (this.error.status >= 400) return "client";
+      if (this.error.status === 0) return "network";
+      return "generic";
+    },
+  },
 };
 </script>
 
