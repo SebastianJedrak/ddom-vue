@@ -8,12 +8,6 @@
       <p>Loading users...</p>
     </div>
 
-    <!-- Empty state -->
-    <div v-else-if="users.length === 0" class="empty-state">
-      <p>No users found</p>
-      <button @click="loadUsers" class="reload-button">Try Again</button>
-    </div>
-
     <!-- Users list -->
     <div v-else class="users-grid">
       <div v-for="user in users" :key="user.id" class="user-card">
@@ -39,8 +33,38 @@
   </div>
 </template>
 
-<script>
-
+<script lang="ts">
+import { getUsers, getUserById } from "../services/api";
+import User from "../services/api";
+export default {
+  data() {
+    return {
+      users: <User[]>[],
+      loading: false,
+    };
+  },
+  methods: {
+    async loadUsers() {
+      this.loading = true;
+      const result = await getUsers();
+      if (result) {
+        this.users = result;
+        console.log(this.users);
+      }
+      this.loading = false;
+    },
+    async testError() {
+      try {
+        await getUserById(9999);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+  mounted() {
+    this.loadUsers();
+  },
+};
 </script>
 
 <style scoped>

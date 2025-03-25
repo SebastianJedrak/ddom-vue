@@ -1,5 +1,10 @@
-<script setup lang="ts">
+<script lang="ts">
 import UsersList from "./components/UsersList.vue";
+export default {
+  components: {
+    UsersList,
+  },
+};
 </script>
 
 <template>
