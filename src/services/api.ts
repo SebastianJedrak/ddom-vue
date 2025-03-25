@@ -1,23 +1,60 @@
 export interface User {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    address: {
-      street: string;
-      suite: string;
-      city: string;
-      zipcode: string;
-      geo: {
-        lat: string;
-        lng: string;
-      }
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
     };
-    phone: string;
-    website: string;
-    company: {
-      name: string;
-      catchPhrase: string;
-      bs: string;
-    }
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
+}
+
+export class ApiError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
   }
+}
+
+const API_BASE_URL = "https://jsonplaceholder.typicode.com";
+
+/**
+ * Fetch data from API with error handling
+ * @param endpoint API endpoint to fetch from
+ * @returns Promise with response data
+ * @throws ApiError with status code and message
+ */
+async function fetchData<T>(endpoint: string): Promise<T> {
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+
+    // Check if response is OK
+    if (!response.ok) {
+      throw new ApiError(
+        `API request failed with status: ${response.status}`,
+        response.status
+      );
+    }
+
+    return (await response.json()) as T;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
