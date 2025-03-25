@@ -48,13 +48,18 @@ export default {
   },
   methods: {
     async loadUsers() {
-      this.loading = true;
-      const result = await getUsers();
-      if (result) {
-        this.users = result;
-        console.log(this.users);
+      try {
+        this.loading = true;
+        const result = await getUsers();
+        if (result) {
+          this.users = result;
+          console.log(this.users);
+        }
+      } catch (err) {
+        this.error = err;
+      } finally {
+        this.loading = false;
       }
-      this.loading = false;
     },
     async testError() {
       try {

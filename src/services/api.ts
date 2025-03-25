@@ -54,7 +54,16 @@ async function fetchData<T>(endpoint: string): Promise<T> {
 
     return (await response.json()) as T;
   } catch (error) {
-    throw error;
+    if (error instanceof ApiError) {
+      console.log(error.status);
+      throw error;
+    }
+
+    // If it's a network error or other fetch error
+    throw new ApiError(
+      error instanceof Error ? error.message : "Unknown API error occurred",
+      0 // Status 0 indicates network/connection error
+    );
   }
 }
 
