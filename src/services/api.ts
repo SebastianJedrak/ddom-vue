@@ -58,3 +58,25 @@ async function fetchData<T>(endpoint: string): Promise<T> {
     throw error;
   }
 }
+
+/**
+ * Get all users from the API
+ * @returns Promise with array of users
+ */
+export async function getUsers(): Promise<User[]> {
+  return fetchData<User[]>("/users");
+}
+
+/**
+ * Get a single user by ID
+ * @param id User ID to fetch
+ * @returns Promise with user data
+ */
+export async function getUserById(id: number): Promise<User> {
+  return fetchData<User>(`/users/${id}`);
+}
+
+export default {
+  getUsers,
+  getUserById,
+};
