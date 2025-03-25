@@ -1,5 +1,29 @@
-# Vue 3 + TypeScript + Vite
+# Vue Error Handling Demo
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A small Vue 3 application demonstrating component building, error handling, and frontend best practices.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Tech Stack
+
+- **Vue 3**
+- **TypeScript**
+
+## Vite
+
+I chose Vite over Vue CLI for excellent TypeScript integration out of the box
+
+## Project Setup
+
+```bash
+# Clone repository
+git clone https://github.com/SebastianJedrak/ddom-vue.git
+cd ddom-vue
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
