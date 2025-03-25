@@ -54,7 +54,6 @@ async function fetchData<T>(endpoint: string): Promise<T> {
 
     return (await response.json()) as T;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 }

@@ -1,5 +1,6 @@
 <template>
-  <Transition name="fade">
+  <span>{{ errorMessage }}</span>
+  <!-- <Transition name="fade">
     <div v-if="error" :class="['error-banner', `error-${errorType}`]">
       <div class="error-content">
         <div class="error-icon">
@@ -28,16 +29,15 @@
       </div>
       <button class="error-close" @click="dismissError">×</button>
     </div>
-  </Transition>
+  </Transition> -->
 </template>
 
 <script lang="ts">
-// import { ApiError } from "../services/api";
+import { ApiError } from "../services/api";
 
 export default {
-  props: { errorMessage: Object | null },
+  props: { errorMessage: ApiError | null },
 };
-
 </script>
 
 <style scoped>
