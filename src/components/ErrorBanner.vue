@@ -33,11 +33,6 @@
 import { ApiError } from "../services/api";
 
 export default {
-  data() {
-    return {
-      errorType: "generic",
-    };
-  },
   props: { error: ApiError | null, dismissError: Function },
   computed: {
     errorType() {
