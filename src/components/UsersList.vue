@@ -4,8 +4,11 @@
 
     <!-- Test error button -->
     <div class="test-error-container">
-      <button @click="testError" class="test-error-button">
+      <button @click="testError(404)" class="test-error-button">
         Test Error Handling (404)
+      </button>
+      <button @click="testError(500)" class="test-error-button">
+        Test Error Handling (500)
       </button>
     </div>
 
@@ -67,11 +70,16 @@ export default {
         this.loading = false;
       }
     },
-    async testError() {
-      try {
-        await getUserById(9999);
-      } catch (err) {
-        this.error = err;
+    async testError(status: number) {
+      if (status === 404) {
+        try {
+          await getUserById(9999);
+        } catch (err) {
+          this.error = err;
+        }
+      }
+      if (status === 500) {
+        this.error = new ApiError(`Simulated error`, status);
       }
     },
     dismissError() {
@@ -187,6 +195,9 @@ h1 {
 }
 
 .test-error-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin: 40px 0;
   text-align: center;
   padding: 20px;
