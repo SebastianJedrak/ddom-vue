@@ -31,16 +31,19 @@
       </button>
     </div>
   </div>
+
+  <ErrorBanner :errorMessage="error" />
 </template>
 
 <script lang="ts">
-import { getUsers, getUserById } from "../services/api";
-import User from "../services/api";
+import { getUsers, getUserById, User, ApiError } from "../services/api";
+import ErrorBanner from "./ErrorBanner.vue";
 export default {
   data() {
     return {
       users: <User[]>[],
       loading: false,
+      error: null | ApiError,
     };
   },
   methods: {
@@ -57,12 +60,15 @@ export default {
       try {
         await getUserById(9999);
       } catch (err) {
-        console.error(err);
+        this.error = err;
       }
     },
   },
   mounted() {
     this.loadUsers();
+  },
+  components: {
+    ErrorBanner,
   },
 };
 </script>
